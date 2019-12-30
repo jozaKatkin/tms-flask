@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+<h1>Products</h1><br>
+<p>
+    <a href="{{ url_for(view.add_button) }}">
+        <h3>Add product</h3></a><br>
+</p>
+<table border=1>
+    <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Amount</th>
+        <th>Comment</th>
+    </tr>
+    {% for product in products %}
+        <tr>
+            <td>
+                <a href="{{ url_for(view.product_info, id = product.id) }}">
+                    <h4>{{ product.id }}</h4>
+                </a>
+
+            </td>
+            <td> {{ product.name }} </td>
+            <td> {{ product.price }} </td>
+            <td> {{ product.amount }} </td>
+            <td> {{ product.comment }} </td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
