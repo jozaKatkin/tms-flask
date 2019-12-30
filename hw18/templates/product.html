@@ -30,17 +30,17 @@
         <td> {{ product.comment }} </td>
     </tr>
 </table>
-<form action=”{{ url_for("view.delete_button", id = product.id) }}” method="POST">
+<form action={{ url_for("delete_button", id = product.id) }} method="POST">
     <p><button type="submit" class="btn btn-success">Delete This Product</button></p>
 </form><br>
 <p><h3>Edit product:</h3></p>
-<form action=”{{ url_for("view.edit_button", id = product.id) }}” method="POST">
+<form action={{ url_for("edit_button", id = product.id) }} method="POST">
     <p><input type="radio" name = "Value to edit" value="name"/>Name</p>
     <p><input type="radio" name = "Value to edit" value="price"/>Price</p>
     <p><input type="radio" name = "Value to edit" value="amount"/>Amount</p>
     <p><input type="radio" name = "Value to edit" value="comment"/>Comment</p>
     <p><input type="text" name = "New value"/></p>
-    <button type="submit" class="btn btn-success">Edit</button>
+    <p><button type="submit" class="btn btn-success">Edit</button></p>
 </form>
 
 </body>

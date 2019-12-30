@@ -6,10 +6,18 @@
 </head>
 <body>
 <h1>Products</h1><br>
-<p>
-    <a href="{{ url_for(view.add_button) }}">
-        <h3>Add product</h3></a><br>
-</p>
+<h3>Add product:</h3></p>
+<form action={{ url_for("add_button") }} method="POST">
+    <p>Name<br>
+        <input type="text" name="Name"/></p>
+    <p>Price<br>
+        <input type="text" name="Price"/></p>
+    <p>Amount<br>
+        <input type="text" name="Amount"/></p>
+    <p>Comment<br>
+        <input type="text" name="Comment"/></p><br>
+    <p><button type="submit" class="btn btn-success">Add</button></p>
+</form>
 <table border=1>
     <tr>
         <th>id</th>
@@ -21,7 +29,7 @@
     {% for product in products %}
         <tr>
             <td>
-                <a href="{{ url_for(view.product_info, id = product.id) }}">
+                <a href={{ url_for("product_info", id = product.id) }}>
                     <h4>{{ product.id }}</h4>
                 </a>
 

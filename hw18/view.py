@@ -4,13 +4,13 @@ from hw18.models import Product
 
 
 @app.route("/")
-def hello():
-    return "Greetings, traveller"
+def link():
+    return render_template("index.html")
 
 
 @app.route("/products")
 def products():
-    products = Product.query.filter_by().all()
+    products = Product.query.all()
     return render_template("products.html", products=products)
 
 
@@ -28,7 +28,7 @@ def delete_button(id):
     return "Saved"
 
 
-@app.route("/products/<id>")
+@app.route("/products/<id>", methods=["POST"])
 def edit_button(id):
     if request.method == 'POST':
         product = Product.query.filter(Product.id == id).first()
@@ -40,14 +40,14 @@ def edit_button(id):
     return "Saved"
 
 
-@app.route("/products/add")
+@app.route("/products", methods=["POST"])
 def add_button():
     if request.method == 'POST':
         name = request.form["Name"]
         price = request.form["Price"]
         amount = request.form["Amount"]
         comment = request.form["Comment"]
-        product = Product(name, price, amount, comment)
+        product = Product(name=name, price=price, amount=amount, comment=comment)
         db.session.add(product)
         db.session.commit()
-    return "Saved"
+    return products()
