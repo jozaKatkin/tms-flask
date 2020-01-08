@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add product</title>
+    <title>Edit product</title>
 </head>
 <body>
 
@@ -18,19 +18,18 @@
 	{% endwith %}
 </div>
 
-<form action="{{ request.path }}" method="post">
+<form action="{{ request.path }}" method="POST">
     <fieldset>
-        <legend><h2>Add product</h2></legend>
+        <legend><h2>Edit product:</h2></legend>
         <label for="Name">Name:</label><br>
-        <p><input type="text" name="Name" placeholder="Name"/><br></p>
+        <p><input type="text" name="Name" placeholder="Name" value="{{ product.name }}"/><br></p>
         <label for="Price">Price:</label><br>
-        <p><input type="text" name="Price" placeholder="Price"/><br></p>
+        <p><input type="text" name="Price" placeholder="Price" value="{{ product.price }}"/><br></p>
         <label for="Amount">Amount:</label><br>
-        <p><input type="text" name="Amount" placeholder="Amount"/><br></p>
+        <p><input name="Amount" placeholder="Amount" value="{{ product.amount }}"><br></p>
         <label for="Comment">Comment:</label><br>
-        <p><input type="text" name="Comment" placeholder="Comment"><br></p>
+        <p><input type="text" name="Comment" placeholder="Comment" value="{{ product.comment }}"><br></p>
     </fieldset>
-
     <p><input type="submit" value="Save"/></p>
 </form>
 </body>

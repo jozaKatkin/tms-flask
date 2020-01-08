@@ -1,5 +1,6 @@
 from sqlalchemy_utils import database_exists, create_database, drop_database
-from hw18.view import app, db
+from hw18.views import *
+
 
 if database_exists(db.engine.url):
     drop_database(db.engine.url)

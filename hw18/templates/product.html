@@ -1,47 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Product</title>
 </head>
 <body>
-<h1>Product</h1><br>
-<table border = 1>
+
+<div>
+	{% with messages = get_flashed_messages(with_categories=true) %}
+	  {% if messages %}
+		<ul>
+		{% for category, message in messages %}
+		  <li class="{{ category }}">{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</div>
+
+<h2>Product:</h2>
+<table valign = "left" cellspacing="5" cellpadding="10" border=1>
     <tr>
-        <th>id</th>
+        <th align="left">id</th>
         <td> {{ product.id }} </td>
     </tr>
 
     <tr>
-        <th>Name</th>
+        <th align="left">Name</th>
         <td> {{ product.name }} </td>
     </tr>
 
     <tr>
-        <th>Price</th>
+        <th align="left">Price</th>
         <td> {{ product.price }} </td>
     </tr>
     <tr>
-        <th>Amount</th>
+        <th align="left">Amount</th>
         <td> {{ product.amount }} </td>
     </tr>
     <tr>
-        <th>Comment</th>
+        <th align="left">Comment</th>
         <td> {{ product.comment }} </td>
     </tr>
 </table>
-<form action={{ url_for("delete_button", id = product.id) }} method="POST">
-    <p><button type="submit" class="btn btn-success">Delete This Product</button></p>
-</form><br>
-<p><h3>Edit product:</h3></p>
-<form action={{ url_for("edit_button", id = product.id) }} method="POST">
-    <p><input type="radio" name = "Value to edit" value="name"/>Name</p>
-    <p><input type="radio" name = "Value to edit" value="price"/>Price</p>
-    <p><input type="radio" name = "Value to edit" value="amount"/>Amount</p>
-    <p><input type="radio" name = "Value to edit" value="comment"/>Comment</p>
-    <p><input type="text" name = "New value"/></p>
-    <p><button type="submit" class="btn btn-success">Edit</button></p>
+<p>
+<form action="{{ url_for("delete_button", product_id = product.id) }}" method="post">
+    <input type="submit" value="Delete"/>
 </form>
-
+</p>
+<form action="{{ url_for("edit_button", product_id = product.id) }}" method="get">
+    <input type="submit" value="Edit"/>
+</form>
 </body>
 </html>

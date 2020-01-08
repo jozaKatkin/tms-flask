@@ -5,20 +5,23 @@
     <title>Products</title>
 </head>
 <body>
-<h1>Products</h1><br>
-<h3>Add product:</h3></p>
-<form action={{ url_for("add_button") }} method="POST">
-    <p>Name<br>
-        <input type="text" name="Name"/></p>
-    <p>Price<br>
-        <input type="text" name="Price"/></p>
-    <p>Amount<br>
-        <input type="text" name="Amount"/></p>
-    <p>Comment<br>
-        <input type="text" name="Comment"/></p><br>
-    <p><button type="submit" class="btn btn-success">Add</button></p>
-</form>
-<table border=1>
+
+<div>
+	{% with messages = get_flashed_messages(with_categories=true) %}
+	  {% if messages %}
+		<ul>
+		{% for category, message in messages %}
+		  <li class="{{ category }}">{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</div>
+
+<h3><a href="{{ url_for("add_button") }}">Add product</a></h3>
+<h3>Products:</h3>
+<table cellspacing="5" cellpadding="10" border=2>
+    <thead>
     <tr>
         <th>id</th>
         <th>Name</th>
@@ -26,10 +29,12 @@
         <th>Amount</th>
         <th>Comment</th>
     </tr>
+    </thead>
+    <tbody>
     {% for product in products %}
         <tr>
             <td>
-                <a href={{ url_for("product_info", id = product.id) }}>
+                <a href="{{ url_for("product_info", product_id = product.id) }}">
                     <h4>{{ product.id }}</h4>
                 </a>
 
@@ -40,6 +45,7 @@
             <td> {{ product.comment }} </td>
         </tr>
     {% endfor %}
+    </tbody>
 </table>
 </body>
 </html>
